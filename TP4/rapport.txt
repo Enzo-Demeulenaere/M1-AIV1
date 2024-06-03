@@ -1,0 +1,60 @@
+Partie 1 
+
+4.
+
+Le premier paramètre du constructeur SIFT correspond au nombre de keypoints que nous choisissons de garder parmi les plus pertinents, or si cet argument vaut 0, nous conservons l'intégralité des keypoints.
+Le second paramètre correspond à l'index des couches que nous observons pour nos keypoints, ainsi avec nLayers valant 3, nous observons les couches d'indice 3 de chaque octave.
+
+Le nombre d'octave utilisé par SIFT semble être determiné par l'indice d'octave maximal trouvé parmi les keypoints, l'octave maximum sera le maximum entre l'indice trouvé et un paramètre INT_MIN prédéfini mais qui semble introuvable dans le code source donné.
+L'octave minimal sera le minimum entre 0 et l'indice d'octave minimal trouvé dans les keypoints. Le nombre d'octave utilisé pour SIFT sera donc la différence entre ces 2 indices d'octaves extremum.
+
+5.
+
+En premières observations très primaires nous pouvons dire que le nombre de keypoints augmente en même temps que le paramètre edgeThreshold, à l'inverse, certains keypoints disparaissent lorsque le contrastThreshold augmente.
+Notons qu'aucun keypoint n'est retenu lorsque le paramètre edgeThreshold vaut 1.
+Maintenant concernant le rôle de ces paramètres, le contrastThreshold influe sur la manière dont les keypoints sont détéctés en retenant les keypoints selon si leur contraste est plus élevé que leurs voisins. D'où le fait que lorsqu'on augmente ce paramètre, de moins en moins de points sont retenus.
+Pour ce qui est du edgeThreshold, il s'avère que ce paramètre a pour but de réduire la detection des keypoints qui se trouvent en bord d'image, l'algorithme compare l'intensité des keypoints et ne garde que ceux dont l'intensité est supérieur à ce paramètre 
+
+6.
+
+Plusieurs paramètres peuvent être modifiés pour selectionner nos keypoints sur la démo en ligne, en revanche seuls 2 seuils sont présents dans l'implémentation à savoir un seuil pour le DoG et un autre pour les bords qui correspond au edgeThreshold d'opencv. Nous ne savons pas si le seuil de DoG correspond à un des paramètres de l'implémentation d'opencv, cela ne semble pas exactement correspondre au paramètre de contraste.
+De plus, une différence d'échelle semble être présente sur le paramètre du edgeThreshold qui trouve ses valeurs entre 0 et 100 dans la démo contrairement à notre implémentation où elles vont de 1 à 20.
+
+Notons que sur la démo en ligne, l'algorithme n'arrive pas à s'executer lorsque CDoG >= 0.1
+
+Sur la démo, si l'on fait varier le DoGThreshold, plus ou moins de keypoints sont retenus. En effet, moins de keypoints sont retenus si la valeur du seuil augmente, c'est un simple filtre sur les plus grandes valeurs de DoG des keypoints
+
+Partie 2
+
+1.
+
+Le critère de correspondance de Lowe consiste à comparer les descripteurs des keypoints pour associer chaque descripteur d'une image au deuxième plus proche descripteur voisin de l'autre image (à condition que les 2 meilleurs correspondances soient suffisament différentes l'une de l'autre).
+Sur la démo en ligne, ce critère est appelé C_match et vaut par défaut 0.6 (allant de 0 à 1)
+
+En essayant trois valeurs différentes pour ce paramètre nous remarquons que la mise en correspondance est plus fine et précise lorsque le paramètre est faible, à l'inverse beaucoup plus de correspondances erronées se font lorsqu'il est élevé
+
+
+2.
+
+Nous pouvons observer plusieurs correspondances dont un petit nombre semblent erronées, cela peut s'expliquer par le fait qu'en utilisant les paramètres par défaut de drawMatches() aucun masque n'a été appliqué et donc toutes les correspondances ont été dessinées, comprenant celles un peu moins fiables
+
+3.
+
+Pour cette observation nous filtrons les 10 meilleures correspondances en les triant par distance croissante avec le code suivant [screen best10]
+
+Certainement à cause de la superposition de certains keypoints, nous n'arrivons à distinguer que 9 correspondances sur les 10 attendues mais toutes semble être correctes.
+Nous pouvons alors emettre l'hypothèse qu'avec un ratio de correspondance de 0.8, nous pouvons être surs que les 10 meilleurs correspondances soient correctes 
+
+4.
+
+Le résultat obtenu est très satisfaisant car nous obtenons une image presque parfaitement alignée, en effet nous observons encore quelques très legeres courbures mais l'image obtenue ressemble fortement à l'image modèle.
+
+5.
+
+Le logo est correctement detecté et mis en évidence dans l'image, nous observons même que les correspondances sont toutes correctes, nous on concluons donc que l'homographie est une méthode très robuste qui apporte des résultats précis.
+
+6.
+
+En essayant sur d'autres images nous pouvons remarquer que la détection a parfois ses limites.
+Par exemple lorsque l'on change le point de vue, la détection arrive toujours à se faire [found_1], en revanche si le point de vue change trop et par ailleurs change l'echelle, la detection ne peut se faire [found2]. 
+Un autre cas de figure apparait lorsque la luminosité est différente comme c'est le cas pour la [found3] où la detection manque certains points et ne parvient pas à se faire correctement. (Pour cette image, un changement d'echelle peut également bruiter le résultat)

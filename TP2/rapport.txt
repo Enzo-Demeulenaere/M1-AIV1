@@ -1,0 +1,26 @@
+1.
+
+En séparant notre image initiale en ses 3 composantes, on peut savoir quel filtre a été utilisé. en effet sur l'image CFA, le pixel en 0,0 a une valeur de 94, or notre image de base a en 0,0 3 composantes de valeurs différentes, mais seule la composante bleue a une valeur de 94.
+On en déduit que le filtre utilisé est un filtre {GRG}
+
+2.
+
+Ces masques nous permettent bien de retrouver les formules de dématriçages car ils ont la capacité d'estimer chaque valeur d'une composante pour un pixel en fonction des pixels alentours. 
+Nous pouvons remarquer que le masque pour la composante verte est différent car les valeurs de la composantes vertes sont présentes dans un arrangement différents que les 2 autres composantes.
+
+3.
+
+Nous avons validé cette fonction en prenant garde que pour un plan chaque pixel avait la même valeur que cette composante dans l'image cfa, ainsi pour les composantes bleues et rouges on remarque qu'un seul pixel sur 4 a une valeur non nulle contre 1 pixel sur 2 dans le plan de la composante verte
+(A condition que la valeur de la composante ne soit pas nulle dans l'image originale)
+
+4.
+
+Dans l'image obtenu par notre fonction, nous pouvons remarquer la présence d'aliasing et de fausses couleurs apparues à plusieurs endroits dans notre image. De plus, un effet de fermeture éclair est aussi présent par endroits.
+
+3.1
+
+Grâce à cette fonction nous obtenons un plan vert estimé par l'algorithme d'Hamilton et Adams [HA97] cependant nous remarquons que certains pixels n'ont pas été calculés sur les bords inférieurs et droits de notre image, cela s'explique par notre implémentation de la fonction qui doit tenir compte de certains bords pour ne pas aller chercher des pixels environnants hors de l'image
+
+3.2.
+
+En comparant les 2 plans verts obtenus par interpolation bilinéaire et par algorithme HA97, nous pouvons remarquer que le plan obtenu par HA97 semble posseder moins de contraste par rapport à notre premier plan

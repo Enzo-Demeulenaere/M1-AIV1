@@ -1,0 +1,46 @@
+1.
+
+Le code calcule 2 tableaux correspondant aux coordonées des x et des y, qui sont respectivement mis aux puissances données en paramètre, puis l'utilisation de la fonction dot multiplie les valeurs d'intensité avec leurs coordonnées mises à la puissance, une première fois avec les puissances de x et à nouveau avec les y puis renvoie la somme de tout les rpoduits obtenus
+Cette manière permets de ne pas écrire de double boucle pour parcourir l'image et y appliquer les calculs
+
+2.
+
+Entre les 2 rectangles, on remarque que l'un est "lissé" et qu'il y a plus de pixels à la valeur non nulle, ainsi plus de pixels interviendront dans le calcul des moments.
+Pour ce qui est des calculs, on remarque que les valeurs propres sont légerement différentes entre les 2, de même pour les vecteurs propres dont l'un a même changé de sens en gardant une direction presque identique.
+
+3.
+
+carre 6 : 105,105
+carre 10 : 825,825
+carre 10_30 : 842,843
+carre 10_45 : 841,838
+carre 20 : 13300,13300
+
+On remarque que les valeurs propres croient en même temps que la taille des carré, on peut même apparenter ces valeurs propres à la norme des vecteurs propres
+
+4.
+
+carre 6: 0.0810,0.0810
+carre 10: 0.0825,0.0825
+carre 10_30: 0.0840,0.0841
+carre 10_45: 0.0853,0.0852
+carre 20: 0.0831,0.0831
+rectange horizontal : 0.3320 0.0195
+rectangle vertical : 0.0195, 0.3320
+rectangle diagonal : 0.2016, 0.2016
+rectangle diagonal lisse : 0.1790, 0.1799
+
+Ainsi on peut noter que les moments normalisés pour les carrés de différentes tailles sont équivalents au millième près.
+Pour les moments des rectangles, on remarque moins leur invariance au changement d'echelle car on suppose plutôt un changement d'orientation.
+
+triangle 10: 0.0950, 0.1005
+triangle 10-15: 0.09603220292048034 0.09913938909121071
+triangle 10-45: 0.09864989375369919 0.09701157597170454
+triangle 10-60: 0.09386691244609244 0.10105148188762944
+
+Une fois de plus les moments normalisés des triangles sont équivalents au millième près ils ne semblent donc pas pouvoir être utilisés comme indices de forme robustes à la rotation.
+En revanche, ils donnent une indication concernant la taille de la forme.
+
+[recuperer les valeurs propres diagonalisés, supposement, elles permettent d'avoir des informations sur la rotation de la forme]
+#Etonnament, les vecteurs propres n'ont pas l'air totalement diagonalisés, un des vecteurs est souvent aux alentours de 10e-16 donc "negligeable"
+

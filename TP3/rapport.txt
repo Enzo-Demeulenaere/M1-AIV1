@@ -1,0 +1,31 @@
+Pour la première partie : juste montrer des screens des valeurs et des images qu'on retrouve bien
+
+Partie 2 :
+
+2.
+
+La DCT est donc une image composée de petites DCT de blocs 8 pixels où l'on remarque que le coin supérieur gauche d'un bloc est toujours composé des pixels aux valeurs absolues les plus élevés, c'est caractéristique d'une DCT car [inserer l'explication à comprendre du cours]
+Lors d'un regard sur l'image dans son entiéreté, on remarque que l'on distingue tout de même vaguement l'image entre tout les pixels gris (de valeur 0 car les pixels ont leur valeur dans l'intervalle [-1;1])
+
+5.
+
+Une fois décompréssée, l'image obtenu semble plus contrastée que l'originale.
+Lorsque l'on applique la fonction jpeg sur l'image lena, on remarque ce même constraste mais l'image originale étant de plus grande résolution et plus détaillée que l'image exemple, on peut aussi remarquer un leger manque de détails où les contours semblent plus "bruts" que dans l'image originale.
+
+Partie 3:
+
+1.
+
+Notre résultat pour le PSNR semble bas par rapport à la qualité observée
+
+2.
+
+Une fois l'image compréssée puis décompréssée, nous observons une qualité varier selon le facteur q passé en parametre en effet plus le parametre q est bas, plus la compression sera maximale et donc la qualité finale minimale et inversement pour un q élevé.
+Pour ce qui est des valeurs du PSNR, celles-ci sont satisfaisantes puisque le PSNR varie entre 27 et 37 pour les décompréssion avec un facteur qualité variant entre 5 et 75
+
+4.
+
+lena : 219.3 kb
+lena_zigzag_5 : 2.7kb
+lena_zigzag_40 : 10.6 kb
+lena_zigzag_75 : 18.6 kb

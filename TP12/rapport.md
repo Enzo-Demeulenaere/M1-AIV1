@@ -1,0 +1,3 @@
+Question 3:
+
+On peut remarquer que la segmentations a été très efficace sur l'image ACP du cas1_dalton42 où l'on voit le nombre ressortir plus facilement qu'avec une simple segmentation RGB, en revanche cette technique effectuée sur le cas2_dalton73 ne permets pas une meilleure detection du nombre et la segmentation RGB reste plus efficace pour ce cas ci. Cela pourrait éventuellement s'expliquer par le fait qu'entre les cas 1 et les cas 2, les composantes les plus efficaces des images ACP étaient différentes 

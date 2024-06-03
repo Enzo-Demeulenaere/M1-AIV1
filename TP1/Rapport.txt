@@ -1,0 +1,21 @@
+Question 1 : Ouvrez l'image, vérifiez qu'elle ne possède qu'une composante.
+Quelles sont ses dimensions ? son type de données et sa profondeur ?
+
+- L'image a une dimension de 128x128, ses données sont de type uint8, cette image a une seule composante, chaque pixel est un niveau de gris codé sur 1 octet
+
+Question 2: Affichez l'image en niveaux de gris. Quelle est la période en pixels du motif cyclique ?
+
+- On peut observer une période de 5 pixels sur cette image
+
+Question 3: Calculer la DFT de l'image. Quelles sont ses dimensions et où les coefficients à partie réelle non nulle se situent-ils ?
+
+- La DFT de l'image a également une dimension de 128x128. Les coefficients à partie réelle non nulle se situent uniquement dans la premiere colonne des valeurs
+
+Question 4: Localiser le coefficient maximal de la DFT et expliquer sa valeur.
+
+- Le coefficient le plus élevé se trouve en (0,0) et il représente la moyenne de l'image, également là où on trouve les basses fréquences qui sont majoritaires. Dans le spectre d'une image, la valeur maximale se trouvera toujours en (0,0)
+
+Pourquoi est-il suggéré de normaliser la DFT par le produit de ses dimensions ?
+
+- Il est suggéré de normaliser la DFT afin de d'avoir des valeurs "exploitables", en revanche pourquoi la normaliser par le produit de ses dimensions ? cela s'explique par le fait qu'au delà des dimensions de l'image, le signal se répete indéfiniment, on normalise selon les dimensions de l'image afin de se concentrer sur la première période. 
+
